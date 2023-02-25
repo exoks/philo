@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oezzaou <oezzaou@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 15:13:34 by oezzaou           #+#    #+#             */
-/*   Updated: 2023/02/25 22:36:37 by oezzaou          ###   ########.fr       */
+/*   Created: 2023/02/24 12:00:48 by oezzaou           #+#    #+#             */
+/*   Updated: 2023/02/25 22:14:07 by oezzaou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # include "philo.h"
 
-int	main(int ac, char **av)
+int	ft_atoi(char *s)
 {
-	t_philo *phs;
-	void 	*(*actions[3])(void *);
+	int		nb;
 	int		i;
-	pthread_t t[10];
 
-	get_actions(actions);
-	phs = get_philosofers(ac, av);
-	if (!phs)
-		return (printf("%s\n", USAGE), 1);
-	i = 0;
-	while (phs->id)
-	{
-		pthread_create(&t[i++], NULL, actions[phs->id - 1], phs);
-		sleep(1);
-		phs = phs->next;
-	}
-	return (0);
+	nb = 0;
+	i = -!(*s == '-' || *s == '+');
+	while (s[++i] && s[i] >= '0' && s[i] <= '9')
+		nb = nb * 10 + s[i] - '0';
+	return (nb * ((*s != '-') - (*s == '-')));
 }
